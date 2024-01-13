@@ -13,11 +13,15 @@ body{
     background-color: #f3f3f3;
 }
 
-.task-container{
+.container{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.main-container{
+    width: 452px;
 }
 
 .header{
@@ -25,35 +29,106 @@ body{
 }
 
 .title{
-    font-size: 24px;
+    font-size: 32px;
     font-weight: 100;
 }
 
-/* .form{
+.tasks-form{
     display: flex;
-    align-items: center;
-} */
-
+    justify-content: space-between;
+}
 
 .task-input{
+    flex: 1;
     outline: none;
     height: 35px;
     padding: 0 15px;
     font-size: 18px;
-    font-weight: 400;
 }
 
-.task-add__button{
-    height: 30px;
-    width: 30px;
+
+.task-add__button {
     font-size: 18px;
     border: none;
     outline: none;
     cursor: pointer;
-    margin-left: 10px;
-    white-space: nowrap;
+    margin-left: 6px;
+    background: transparent;
+    transition: .2s;
+    background-color: rgb(225 240 11);
+    color: #494949;
+    padding: 8px 12px;
+    border-radius: 10px;
 }
 
 .task-add__button:hover{
     color: rgb(177, 177, 20)green
+}
+
+.info__section{
+    margin-top: 14px;
+}
+
+.tasks__info{
+    display: flex;
+    gap: 18px;
+}
+
+.tasks__info-button{
+    padding: 5px 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    background: transparent;
+    transition: .2s;
+}
+
+.tasks__delete-all{
+    display: flex;
+    flex: auto;
+    justify-content: flex-end;
+}
+
+.active{
+    background-color: rgb(225 240 11);
+    color: #494949;
+}
+
+.main__section{
+    margin-top: 38px;
+}
+
+.tasks-container{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 6px;
+}
+
+.task-container{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+.task-span{
+    flex: 1;
+}
+
+.task-buttons{
+    display: flex;
+    gap: 16px;
+}
+
+.task-button{
+    display: flex;
+    border: 0;
+    cursor: pointer;
+}
+
+.completed{
+    text-decoration: line-through;
 }
