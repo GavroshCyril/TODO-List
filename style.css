@@ -11,6 +11,7 @@
 body{
     font-family: 'Poppins', sans-serif;
     background-color: #f3f3f3;
+    color: rgb(73, 73, 73);;
 }
 
 .container{
@@ -21,7 +22,7 @@ body{
 }
 
 .main-container{
-    width: 452px;
+    min-width: 520px;
 }
 
 .header{
@@ -71,7 +72,7 @@ body{
 
 .tasks__info{
     display: flex;
-    gap: 18px;
+    gap: 6px;
 }
 
 .tasks__info-button{
@@ -104,7 +105,9 @@ body{
     display: flex;
     flex-direction: column;
     margin: 0px 6px;
+    gap: 12px;
 }
+
 
 .task-container{
     display: flex;
@@ -112,10 +115,33 @@ body{
     gap: 16px;
     border: 1px solid black;
     padding: 5px 10px;
+    word-wrap: break-word;
 }
+
+input[type="checkbox"] {
+    accent-color: rgb(225 240 11);
+    height: 20px;
+    width: 20px;
+}
+
+input[type=checkbox]:checked + label:before {
+    content: "\2713";
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+      line-height: 12px;
+  }
+
 
 .task-span{
     flex: 1;
+}
+
+.task-date{
+    font-size: 12px;
+    font-style: normal;
+    color: #0000008a;
 }
 
 .task-buttons{
@@ -130,5 +156,7 @@ body{
 }
 
 .completed{
+    background: rgb(225 240 11);
     text-decoration: line-through;
 }
+

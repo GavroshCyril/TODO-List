@@ -43,7 +43,7 @@ form.append(input, addTaskButton)
 infoSection.append(tasksInfo)
 
 allTasks.innerText = 'All'
-completedTasks.innerText = 'Completed'
+completedTasks.innerText = 'Completed: 1'
 
 allTasks.classList.add('tasks__all', 'tasks__info-button', 'active')
 completedTasks.classList.add('tasks__completed', 'tasks__info-button')
@@ -73,10 +73,14 @@ const taskInfo = document.createElement('span')
 taskInfo.classList.add('task-span')
 taskInfo.innerText = 'English lesson with Maya'
 
+const taskDate = document.createElement('span')
+taskDate.classList.add('task-date')
+taskDate.innerText = '13/01/2024'
+
 const taskButtonsContainer = document.createElement('div')
 taskButtonsContainer.classList.add('task-buttons')
 
-taskContainer.append(taskCheckbox, taskInfo, taskButtonsContainer)
+taskContainer.append(taskCheckbox, taskInfo, taskDate, taskButtonsContainer)
 
 const taskDeleteButton = document.createElement('button')
 taskDeleteButton.classList.add('task-delete__button', 'task-button')
