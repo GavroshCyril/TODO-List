@@ -22,7 +22,7 @@ body{
 }
 
 .main-container{
-    min-width: 520px;
+    width: 628px;
 }
 
 .header{
@@ -42,7 +42,6 @@ body{
 .task-input{
     flex: 1;
     outline: none;
-    height: 35px;
     padding: 0 15px;
     font-size: 18px;
 }
@@ -67,12 +66,34 @@ body{
 }
 
 .info__section{
-    margin-top: 14px;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .tasks__info{
     display: flex;
     gap: 6px;
+}
+
+.tasks__search{
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+
+.search-input{
+    padding: 7px 10px;
+    flex: .5;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-button{
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 .tasks__info-button{
@@ -160,3 +181,13 @@ input[type=checkbox]:checked + label:before {
     text-decoration: line-through;
 }
 
+.info-log__section{
+    margin-top: 114px;
+    display: flex;
+    justify-content: center;
+}
+
+.info-log__span{
+    font-weight: 100;
+    font-size: 26px;
+}
