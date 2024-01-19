@@ -14,13 +14,37 @@ const completedTasks = document.createElement('button')
 const deleteAllTasks = document.createElement('button')
 
 
+
+const createButton = (text, type, className) => {
+    const button = document.createElement('button')
+    button.classList.add(className)
+    button.textContent = text
+    button.type = type
+    return button
+}
+
+const createInput = (type, placeholder, className) => {
+    const input = document.createElement('input')
+    input.classList.add(className)
+    input.type = 'text'
+    input.placeholder = placeholder
+    return input
+}
+
+const createSection = (className) => {
+    const section = document.createElement('section')
+    section.classList.add(className)
+    return section
+}
+
+
 input.placeholder = 'Enter your task'
 input.classList.add('task-input')
 
 title.innerText = 'TODO List'
 header.append(title)
 
-header.classList.add('header')
+header.classList.add('header').
 title.classList.add('title')
 container.classList.add('container')
 mainContainer.classList.add('main-container')
@@ -116,5 +140,22 @@ taskEditButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="16" 
 taskButtonsContainer.append( taskEditButton, taskDeleteButton)
 }
 
-createTask('English with Maya', '14/01/2024')
-createTask('To be or not to be', '15/01/2024', true)
+const tasks = [
+    {
+    id: self.crypto.randomUUID(),
+    task: 'Выучить JS',
+    isCompleted: false,
+    date: new Date().toLocaleDateString()
+   },
+   {
+    id: self.crypto.randomUUID(),
+    task: 'Выучить JS',
+    isCompleted: false,
+    date: new Date().toLocaleDateString()
+   },
+  ]
+
+
+tasks.forEach(task => {
+    createTask(task.text, task.date, task.id, task.isCompleted)
+})
