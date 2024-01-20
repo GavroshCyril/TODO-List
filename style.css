@@ -94,6 +94,7 @@ body{
     border: none;
     background: none;
     cursor: pointer;
+    font-size: 20px;
 }
 
 .tasks__info-button{
@@ -174,10 +175,15 @@ input[type=checkbox]:checked + label:before {
     display: flex;
     border: 0;
     cursor: pointer;
+    background: transparent;
+    font-size: 16px;
 }
 
-.completed{
-    background: rgb(225 240 11);
+.completed {
+    background: rgb(225, 240, 11);
+}
+
+.completed .task-span {
     text-decoration: line-through;
 }
 
