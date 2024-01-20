@@ -67,7 +67,11 @@ root.append(container)
 container.append(mainContainer)
 mainContainer.append(header, infoSection)
 header.append(form)
-form.append(createInput('text', 'Enter your task', 'task-input'), createButton('Add Task', 'submit', 'task-add__button'))
+
+const taskInput = createInput('text', 'Enter your task', 'task-input')
+const addTaskButton = createButton('Add Task', 'submit', 'task-add__button')
+
+form.append(taskInput, addTaskButton)
 infoSection.append(tasksInfo, tasksSearch)
 
 const allTaskButton = createButton('All', "button", 'tasks__all', 'tasks__info-button', 'active')
@@ -138,7 +142,7 @@ const tasks = [
    },
   ]
 
-
+  
 tasks.forEach(task => {
     createTaskItem(task.text, task.date, task.id, task.isCompleted)
 })
