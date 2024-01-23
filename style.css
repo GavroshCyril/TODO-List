@@ -179,7 +179,7 @@ input[type=checkbox]:checked + label:before {
     font-size: 16px;
 }
 
-.completed {
+.task-container.completed {
     background: rgb(225, 240, 11);
 }
 
@@ -187,13 +187,16 @@ input[type=checkbox]:checked + label:before {
     text-decoration: line-through;
 }
 
+
 .info-log__section{
     margin-top: 114px;
     display: flex;
     justify-content: center;
 }
 
-.info-log__span{
+.info-log__span {
     font-weight: 100;
     font-size: 26px;
+    margin-top: 40px;
+    text-align: center;
 }

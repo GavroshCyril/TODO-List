@@ -1,3 +1,4 @@
+window.addEventListener("load", () => {
 const root = document.getElementById('root')
 const container = document.createElement('div')
 const mainContainer = document.createElement('div')
@@ -79,15 +80,18 @@ const completedTaskButton = createButton('Completed: 1', 'button', 'tasks__compl
 const deleteAllTasksButton = createButton('Delete all tasks', 'button', 'tasks__delete-all', 'tasks__info-button')
 tasksInfo.append(allTaskButton, completedTaskButton, deleteAllTasksButton)
 
+
+
 const mainSection = createSection('main__section')
 
-// createSpan('All tasks completed. Enjoy the moment!', 'info-log__span')
+
 mainContainer.append(mainSection)
 
 const tasksContainer = document.createElement('div')
 tasksContainer.classList.add('tasks-container')
 
 const createTaskItem = (text, date, id, isCompleted) => {
+
     const taskItem = document.createElement('div')
     taskItem.id = id
     taskItem.className = 'task-container'
@@ -97,10 +101,23 @@ const createTaskItem = (text, date, id, isCompleted) => {
 
     const checkbox = createInput('checkbox', '', 'task-checkbox')
     checkbox.checked = isCompleted
-
-    if(isCompleted) {
-        taskItem.classList.toggle('completed')
+    if (checkbox.checked) {
+        taskItem.classList.add('completed');
+    } else {
+        taskItem.classList.remove('completed');
     }
+
+    checkbox.addEventListener('change', () => {
+
+        const taskIndex = tasks.findIndex(task => task.id === id);
+        if (taskIndex !== -1) {
+            tasks[taskIndex].isCompleted = checkbox.checked;
+            
+            renderTasks();
+
+        }
+
+    })
 
     const currentDate = createSpan(date, 'task-date__span')
 
@@ -110,6 +127,9 @@ const createTaskItem = (text, date, id, isCompleted) => {
     taskItem.append(taskButtonsContainer)
     const editTaskButton = createButton('', 'button', 'task-edit__button', 'task-button', 'fa-solid', 'fa-pen-to-square')
     const deleteTaskButton = createButton('', 'button', 'task-delete__button', 'task-button', 'fa-solid', 'fa-trash')
+
+
+    deleteTaskButton.addEventListener('click', () => deleteTask(id))
 
     taskButtonsContainer.append(editTaskButton, deleteTaskButton)
     taskItem.append(checkbox, taskText, currentDate, taskButtonsContainer)
@@ -142,7 +162,65 @@ const tasks = [
    },
   ]
 
-  
-tasks.forEach(task => {
-    createTaskItem(task.text, task.date, task.id, task.isCompleted)
+
+
+
+const deleteTask = (id) => {
+    const taskIndex = tasks.findIndex(task => task.id === id)
+
+    if (taskIndex !== -1) {
+        tasks.splice(taskIndex, 1)
+    }
+
+    renderTasks()
+}
+
+const deleteAllTasks = () => {
+    tasks.length = 0
+    renderTasks()
+}
+
+deleteAllTasksButton.addEventListener('click', deleteAllTasks)
+
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const taskText = taskInput.value
+
+    if (taskText === "") {
+        return alert("Warning! You must write something!");
+      }
+
+    console.log('taskText: ', taskText);
+    tasks.push({
+        id: self.crypto.randomUUID(),
+        text: taskText,
+        isCompleted: false,
+        date: new Date().toLocaleDateString()
+    })
+
+    tasks.forEach(task => {
+        createTaskItem(task.text, task.date, task.id, task.isCompleted)
+    })
+
+    taskInput.value = ''
+    renderTasks()
+})
+
+const renderTasks = () => {
+    tasksContainer.innerHTML = ''
+
+    if(tasks.length > 0) {
+        tasks.forEach(task => {
+            createTaskItem(task.text, task.date, task.id, task.isCompleted)
+        })
+    } else {
+
+        const showInfo = createSpan('All tasks completed. Enjoy the moment!', 'info-log__span')
+        tasksContainer.append(showInfo)
+    }
+
+}
+
 })
