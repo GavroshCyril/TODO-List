@@ -1,0 +1,1 @@
+import { getDataLocalStorage, setDataLocalStorage } from "../utils.js"
