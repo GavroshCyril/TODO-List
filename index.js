@@ -7,6 +7,7 @@ const title = document.createElement('h2')
 const form = document.createElement('form')
 const tasksInfo = document.createElement('div')
 
+
 const createButton = (text = '', type, ...classNames) => {
     const button = document.createElement('button')
     for(const className of classNames) {
@@ -76,7 +77,7 @@ form.append(taskInput, addTaskButton)
 infoSection.append(tasksInfo, tasksSearch)
 
 const allTaskButton = createButton('All', "button", 'tasks__all', 'tasks__info-button', 'active')
-const completedTaskButton = createButton('Completed: 1', 'button', 'tasks__completed', 'tasks__info-button')
+const completedTaskButton = createButton('Completed', 'button', 'tasks__completed', 'tasks__info-button')
 const deleteAllTasksButton = createButton('Delete all tasks', 'button', 'tasks__delete-all', 'tasks__info-button')
 tasksInfo.append(allTaskButton, completedTaskButton, deleteAllTasksButton)
 
@@ -89,6 +90,16 @@ mainContainer.append(mainSection)
 
 const tasksContainer = document.createElement('div')
 tasksContainer.classList.add('tasks-container')
+
+
+const setDataLocalStorage = (key, data) => {
+    localStorage.setItem(key, JSON.stringify(data))
+}
+
+const getDataLocalStorage = (key) => {
+    return JSON.parse(localStorage.getItem(key)) ?? []
+}
+
 
 const createTaskItem = (text, date, id, isCompleted) => {
 
@@ -112,7 +123,7 @@ const createTaskItem = (text, date, id, isCompleted) => {
         const taskIndex = tasks.findIndex(task => task.id === id);
         if (taskIndex !== -1) {
             tasks[taskIndex].isCompleted = checkbox.checked;
-            
+            setDataLocalStorage('todoList', tasks)
             renderTasks();
 
         }
@@ -140,29 +151,6 @@ const createTaskItem = (text, date, id, isCompleted) => {
     return taskItem
 }
 
-const tasks = [
-    {
-    id: self.crypto.randomUUID(),
-    text: 'Выучить JS',
-    isCompleted: false,
-    date: new Date().toLocaleDateString()
-   },
-   {
-    id: self.crypto.randomUUID(),
-    text: 'English with Maya',
-    isCompleted: true,
-    date: new Date().toLocaleDateString()
-   },
-
-   {
-    id: self.crypto.randomUUID(),
-    text: 'To read a book',
-    isCompleted: false,
-    date: new Date().toLocaleDateString()
-   },
-  ]
-
-
 
 
 const deleteTask = (id) => {
@@ -171,12 +159,13 @@ const deleteTask = (id) => {
     if (taskIndex !== -1) {
         tasks.splice(taskIndex, 1)
     }
-
+    setDataLocalStorage('todoList', tasks)
     renderTasks()
 }
 
 const deleteAllTasks = () => {
     tasks.length = 0
+    setDataLocalStorage('todoList', tasks)
     renderTasks()
 }
 
@@ -200,6 +189,8 @@ form.addEventListener('submit', (e) => {
         date: new Date().toLocaleDateString()
     })
 
+    setDataLocalStorage('todoList', tasks)
+
     tasks.forEach(task => {
         createTaskItem(task.text, task.date, task.id, task.isCompleted)
     })
@@ -207,6 +198,12 @@ form.addEventListener('submit', (e) => {
     taskInput.value = ''
     renderTasks()
 })
+
+const countTasks = () => {
+    const completedTask = tasks.filter(task => task.isCompleted === true).length
+    completedTaskButton.textContent = `Completed: ${completedTask}`
+}
+
 
 const renderTasks = () => {
     tasksContainer.innerHTML = ''
@@ -216,11 +213,17 @@ const renderTasks = () => {
             createTaskItem(task.text, task.date, task.id, task.isCompleted)
         })
     } else {
-
         const showInfo = createSpan('All tasks completed. Enjoy the moment!', 'info-log__span')
         tasksContainer.append(showInfo)
     }
 
+    countTasks()
 }
+
+
+
+
+const tasks = getDataLocalStorage('todoList');
+    renderTasks()
 
 })

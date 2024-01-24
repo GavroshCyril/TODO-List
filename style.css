@@ -158,6 +158,7 @@ input[type=checkbox]:checked + label:before {
 
 .task-span{
     flex: 1;
+    word-break: break-word;
 }
 
 .task-date{
